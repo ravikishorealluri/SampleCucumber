@@ -154,8 +154,8 @@ public class api_Steps extends confUtils {
 
     }
 
-    @Given("^I call the \"([^\"]*)\" Method$")
-    public void iCallTheMethod(String MethodName) throws Throwable {
+    @Then("^I call the GET Method$")
+    public void iCallTheGetMethod() throws Throwable {
         response = RestAssured.get();
     }
 
@@ -166,7 +166,18 @@ public class api_Steps extends confUtils {
 
     @Then("^I verify city \"([^\"]*)\" present in response$")
     public void iVerifyCityPresentInResponse(String CityName) throws Throwable {
-        assertThat(response.jsonPath().get("City"), is("Hyderabad"));
+//         List<Map<String,String>> Cities = response.jsonPath().get("City");
+//         Map<String,String> resultMap = new HashMap<>();
+//
+//         for(Map<String,String> singlecity : Cities){
+//             if(singlecity.get("name").equalsIgnoreCase("Hyderabad")){
+//                 resultMap.put("Hydtemp",singlecity.get("Temperature") );
+//                 resultMap.put("HydHumidity",singlecity.get("Humidity") );
+//                break;
+//             }
+//         }
+        //sysout --  resultMap
+        assertThat(response.jsonPath().get("City"), is(CityName));
     }
 
     @Given("^I set \"([^\"]*)\" Base URL$")
@@ -206,6 +217,11 @@ public class api_Steps extends confUtils {
     @And("^I Close the Session \"([^\"]*)\"$")
     public void iCloseTheSession(String arg0) throws Throwable {
        response = httpRequest.body("{}").when().post();
+    }
+
+    @And("^I call the POST Method$")
+    public void iCallThePOSTMethod() {
+        response = RestAssured.post();
     }
 }//* Close class
 

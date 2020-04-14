@@ -1,7 +1,6 @@
 package com.ravi.personal.pages;
 
 import com.ravi.personal.pageObject.PageObject;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -13,10 +12,14 @@ public class SignInPage extends PageObject {
     @FindBy(css="div.a4bIc > input")
     public WebElement SearchInput;
 
-    @FindBy(linkText="Gmai")
+    @FindBy(linkText="Gmail")
     public WebElement GmailLink;
+
+    @FindBy(css = "div.a4bIc > inpu")
+    public WebElement SearchValue;
 
     public WebElement getGoogleSearchInput(){return SearchInput;}
     public WebElement getGoogleGmailLink(){return GmailLink;}
+    public WebElement getGoogleSearchValue(){return SearchValue;}
 
 }

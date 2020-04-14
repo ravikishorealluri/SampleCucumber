@@ -5,7 +5,7 @@ Feature: Validate Sign In Process
         And I Launch Application in Specified Browser
 
     @VerifySignIn
-    Scenario Outline: Verify Error Messages when User try to Sign In with null UserID and Password
+    Scenario Outline: Launch Application and Verify Elements
         Given I should be on SignIn Page and I verify Page Title is "Google"
         And I Verify Search Box is Available
 #        And I Enter User given Value in Search Box

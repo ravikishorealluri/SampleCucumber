@@ -5,15 +5,17 @@ import com.ravi.personal.utils.confUtils;
 import com.ravi.personal.utils.getAppURL;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileNotFoundException;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SignIn_Steps extends confUtils {
 //* Get the Application URL
@@ -26,12 +28,14 @@ public class SignIn_Steps extends confUtils {
 
     @Given("^I set Browser Type and Environment Type from Configuration File$")
     public void iSetBrowserTypeAndEnvironmentTypeFromConfigurationFile() throws Throwable{
+  
     }
 
     @And("^I Launch Application in Specified Browser$")
     public void iLaunchApplicationInSpecifiedBrowser()  throws Throwable{
-        getWebDriver().navigate().to(getAppURL.getApplicationURL(getProperties().getProperty("Environment")));
+        getWebDriver(getProperties().getProperty("browser")).navigate().to(getAppURL.getApplicationURL(getProperties().getProperty("Environment")));
         webDriver.manage().window().maximize();
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Thread.sleep(2000);
     }
 
@@ -56,6 +60,8 @@ public class SignIn_Steps extends confUtils {
     @And("^I Verify Search Box is Available and enter \"([^\"]*)\"$")
     public void iVerifySearchBoxIsAvailableAndEnter(String SearchValue) throws Throwable {
         SignIn = new SignInPage();
+        WebDriverWait wait = new WebDriverWait(webDriver,30);
+        wait.until(ExpectedConditions.visibilityOf(SignIn.getGoogleSearchInput()));
         Assert.assertTrue(SignIn.getGoogleSearchInput().isDisplayed());
         SignIn.getGoogleSearchInput().sendKeys(SearchValue);
         System.out.println("Search Input Box is Available On Sign In Page and Value Set is : " +SearchValue );
@@ -64,22 +70,15 @@ public class SignIn_Steps extends confUtils {
     @And("^I Verify Gmail Link is Available and Click$")
     public void iVerifyGmailLinkIsAvailableAndClick() throws InterruptedException {
         try{
-//         Element#1
-
-            if(webDriver.findElement(By.cssSelector("div.a4bIc > inpu")).isDisplayed()){
-                System.out.println("Search Input box Available.");
-            }else{
-                System.out.println("Search Input box NOT Available.");
-            }
-
-
 //         Element#2
             Assert.assertTrue(SignIn.getGoogleGmailLink().isDisplayed()) ;
             System.out.println("Gmail Link Available.");
+            SignIn.getGoogleGmailLink().click();
+            System.out.println("Gmail Link Clicked.");
             Thread.sleep(2000);
 
         }catch (Exception e){
-            System.out.println("Search Input box NOT Available.");
+            System.out.println("Gmail Link NOT Available.");
         }
 
     }
@@ -122,7 +121,7 @@ public class SignIn_Steps extends confUtils {
     @And("^I Launch \"([^\"]*)\" in Specified Browser$")
     public void iLaunchInSpecifiedBrowser(String Application) throws Throwable {
 //        Application="http://google.com";
-        getWebDriver().navigate().to(Application);
+        getWebDriver(getProperties().getProperty("browser")).navigate().to(Application);
         Thread.sleep(3000);
         webDriver.manage().window().maximize();
         Thread.sleep(3000);
@@ -167,7 +166,7 @@ public class SignIn_Steps extends confUtils {
     public void iVerifySearchBoxIsAvailableAndTakeAScreenshotWhenFails() throws Exception {
        try{
            Assert.assertTrue(webDriver.findElement(By.cssSelector("div.a4bIc > inpu")).isDisplayed());
-           webDriver.findElement(By.cssSelector("div.a4bIc > inpu")).isDisplayed();
+//           webDriver.findElement(By.cssSelector("div.a4bIc > inpu")).isDisplayed();
            System.out.println("Search Input Box is Available On Sign In Page.");
        } catch (Exception e) {
            System.out.println("Search Input Box is NOT Available On Sign In Page.please find attached Screenshot");
@@ -196,28 +195,31 @@ public class SignIn_Steps extends confUtils {
                 case "Search Input":
                     isElementPresence(SignIn.getGoogleSearchInput(),ElementName);
                     break;
+                case "Search Value":
+                    isElementPresence(SignIn.getGoogleSearchValue(),ElementName);
+                    break;
             }
 
         }
     }
 
-    public void isElementPresence( WebElement Element,String ElementName) throws Exception {
 
-        try{
-             Element.isDisplayed();
-             System.out.println("Element Name: "+ElementName+" is Available.");
-
-        }catch (Exception e){
-            System.out.println("Element Name: "+ElementName+" is NOT Available.");
-            getScreenshot(ElementName);
-            isTestPassed=false;
-        }
-
-    }
 
     @And("^I verify all above steps are passed$")
     public void iVerifyAllAboveStepsArePassed() {
         Assert.assertTrue(isTestPassed);
     }
+
+    @Then("^I verify WebElements are Available$")
+    public void iVerifyWebElementsAreAvailable() {
+        List<WebElement> elementsList = webDriver.findElements(By.id("Name"));
+        System.out.println("Size of Elements list is:"+elementsList.size());
+    }
+
+
+//    @Given("^I will be Printing \"([^\"]*)\"$")
+//    public void iWillBePrinting(String printWord) throws Throwable {
+//       System.out.println(printWord);
+//    }
 }//* Close class
 

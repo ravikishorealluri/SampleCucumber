@@ -4,20 +4,19 @@ package com.ravi.personal.utils;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.*;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class confUtils {
@@ -41,25 +40,26 @@ public class confUtils {
         return propertiesInfo;
     }
 
-//* Get Webdriver
-    public static WebDriver getWebDriver() throws Throwable{
-        String browserName= getProperties().getProperty("browser");
+//* Get WebDriver
+    public static WebDriver getWebDriver(String browserName) throws Throwable{
+//        String browserName= getProperties().getProperty("browser");
         switch (browserName.toLowerCase()){
             case "chrome" :
                 System.setProperty("webdriver."+browserName.toLowerCase() +".driver","C:\\BrowserDrivers\\chromedriver.exe");
                 webDriver = new ChromeDriver();
                 break;
             case "ie" :
-                System.setProperty("webdriver."+browserName.toLowerCase() +".driver","C:\\BrowserDrivers\\chromedriver.exe");
-              break;
-                //*  webDriver = new ieDriver();
+                System.setProperty("webdriver."+browserName.toLowerCase() +".driver","C:\\BrowserDrivers\\IEDriverServer.exe");
+                webDriver = new InternetExplorerDriver();
+                break;
             case "firefox" :
-                System.setProperty("webdriver."+browserName.toLowerCase() +".driver","C:\\BrowserDrivers\\chromedriver.exe");
+                System.setProperty("webdriver.gecko.driver","C:\\BrowserDrivers\\geckodriver.exe");
                 webDriver = new FirefoxDriver();
         break;
         }
         return webDriver;
     }
+
 //* Get User Input
     public static String getUserInput() throws Throwable{
 
@@ -135,6 +135,18 @@ public class confUtils {
         return RowInfoList;
     } //* Close Method
 
+//* Verify Element is Present
+    public void isElementPresence( WebElement Element,String ElementName) throws Exception {
+
+        try{
+            Element.isDisplayed();
+            System.out.println("Element Name: "+ElementName+" is Available.");
+        }catch (Exception e){
+            System.out.println("Element Name: "+ElementName+" is NOT Available.Please Refer Screenshot...");
+            getScreenshot(ElementName);
+        }
+
+    }
 //* Get a Screenshot
     public static void getScreenshot(String screenShotFileName) throws Exception
     {
@@ -160,4 +172,19 @@ public class confUtils {
         }
         return csvFileInfoList;
     }
+
+    public int getRandomNum(int min, int max) {
+        Random rand = new Random();
+        int randomNum = min + rand.nextInt((max - min) + 1);
+        return randomNum;
+    }
+    public String getReverseString(String Input){
+        String outPut = new StringBuffer(Input).reverse().toString();
+        return outPut;
+    }
+    public void performAction(WebElement LoanStep) throws Throwable {
+        Actions action = new Actions(getWebDriver(getProperties().getProperty("browser"))) ;
+        action.moveToElement(LoanStep).build().perform();
+    }
+
 }//* Close Class

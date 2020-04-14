@@ -1,0 +1,181 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 220537400,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I set Browser Type and Environment Type from Configuration File",
+            "match": {
+              "location": "SignIn_Steps.iSetBrowserTypeAndEnvironmentTypeFromConfigurationFile()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 16355091800,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I Launch Application in Specified Browser",
+            "match": {
+              "location": "SignIn_Steps.iLaunchApplicationInSpecifiedBrowser()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 21,
+        "name": "Launch Application and Verify Elements",
+        "description": "",
+        "id": "validate-sign-in-process;launch-application-and-verify-elements;;2",
+        "after": [
+          {
+            "result": {
+              "duration": 4856405100,
+              "status": "passed"
+            },
+            "match": {
+              "location": "hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 32979700,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "I should be on SignIn Page and I verify Page Title is \"Google\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Google",
+                  "offset": 55
+                }
+              ],
+              "location": "SignIn_Steps.iShouldBeOnSignInPageAndIVerifyPageTitleIs(String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 94936600,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "I Verify Search Box is Available",
+            "match": {
+              "location": "SignIn_Steps.iVerifySearchBoxIsAvailable()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 393759900,
+              "status": "passed"
+            },
+            "comments": [
+              {
+                "line": 11,
+                "value": "#        And I Enter User given Value in Search Box"
+              }
+            ],
+            "line": 12,
+            "name": "I Verify Search Box is Available and enter \"Selenium\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Selenium",
+                  "offset": 44
+                }
+              ],
+              "location": "SignIn_Steps.iVerifySearchBoxIsAvailableAndEnter(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3462836900,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "I Verify Gmail Link is Available and Click",
+            "match": {
+              "location": "SignIn_Steps.iVerifyGmailLinkIsAvailableAndClick()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3207424400,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "I read Excel file to get search values",
+            "match": {
+              "location": "SignIn_Steps.iReadExcelFileToGetSearchValues()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2001950400,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "I read csv file to get search values",
+            "match": {
+              "location": "SignIn_Steps.iReadCsvFileToGetSearchValues()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 649926600,
+              "error_message": "java.lang.AssertionError\r\n\tat org.junit.Assert.fail(Assert.java:86)\r\n\tat org.junit.Assert.fail(Assert.java:95)\r\n\tat com.ravi.personal.steps.SignIn_Steps.iVerifySearchBoxIsAvailableAndTakeAScreenshotWhenFails(SignIn_Steps.java:166)\r\n\tat ✽.And I Verify Search Box is Available and take a Screenshot when fails(SignIn.feature:17)\r\n",
+              "status": "failed"
+            },
+            "comments": [
+              {
+                "line": 16,
+                "value": "#        And I get all links available on the SignIn Page"
+              }
+            ],
+            "line": 17,
+            "name": "I Verify Search Box is Available and take a Screenshot when fails",
+            "match": {
+              "location": "SignIn_Steps.iVerifySearchBoxIsAvailableAndTakeAScreenshotWhenFails()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 7,
+            "name": "@VerifySignIn"
+          }
+        ]
+      }
+    ],
+    "name": "Validate Sign In Process",
+    "description": "",
+    "id": "validate-sign-in-process",
+    "keyword": "Feature",
+    "uri": "SignIn.feature"
+  }
+]

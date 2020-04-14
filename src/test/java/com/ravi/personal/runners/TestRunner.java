@@ -11,7 +11,7 @@ import java.io.File;
 @CucumberOptions(
         glue = {"com.ravi.personal.steps"},
         features={"src\\main\\java\\com\\ravi\\personal\\features"},
-      tags={"@VerifySignIn"},
+        tags={"@VerifySignIn"},
         plugin = { "pretty", "html:target/cucumber-reports","json:target/cucumber-reports/Cucumber.json" }
 )
 public class TestRunner {
