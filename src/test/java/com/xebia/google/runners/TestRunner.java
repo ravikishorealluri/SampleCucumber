@@ -1,4 +1,4 @@
-package com.ravi.personal.runners;
+package com.xebia.google.runners;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -11,8 +11,8 @@ import java.io.File;
 @CucumberOptions(
         glue = {"com.ravi.personal.steps"},
         features={"src\\main\\java\\com\\ravi\\personal\\features"},
-        tags={"@VerifySignIn"},
-        plugin = { "pretty", "html:target/cucumber-reports","json:target/cucumber-reports/Cucumber.json" }
+        tags={"@SearchOnHomePage"},
+        plugin = { "pretty", "html:target/cucumber-reports/","json:target/cucumber-reports/Cucumber.json" }
 )
 public class TestRunner {
     @BeforeClass

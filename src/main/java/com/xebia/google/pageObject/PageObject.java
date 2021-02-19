@@ -1,4 +1,4 @@
-package com.ravi.personal.pageObject;
+package com.xebia.google.pageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;

@@ -1,7 +1,7 @@
-package com.ravi.personal.utils;
+package com.xebia.google.utils;
 
 public class getAppURL {
-    public String getApplicationURL(String appEnvironment) throws Exception{
+    public String getApplicationURL(String appEnvironment) {
         String appURL="";
         switch (appEnvironment.toLowerCase()){
             case "dev" :

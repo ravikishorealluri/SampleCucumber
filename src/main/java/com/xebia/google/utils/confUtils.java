@@ -1,6 +1,7 @@
-package com.ravi.personal.utils;
+package com.xebia.google.utils;
 
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,8 @@ import org.openqa.selenium.interactions.Actions;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+
+
 
 public class confUtils {
 //* Variables
@@ -45,7 +48,8 @@ public class confUtils {
 //        String browserName= getProperties().getProperty("browser");
         switch (browserName.toLowerCase()){
             case "chrome" :
-                System.setProperty("webdriver."+browserName.toLowerCase() +".driver","C:\\BrowserDrivers\\chromedriver.exe");
+//                System.setProperty("webdriver."+browserName.toLowerCase() +".driver","C:\\BrowserDrivers\\chromedriver.exe");
+                WebDriverManager.chromedriver().setup();
                 webDriver = new ChromeDriver();
                 break;
             case "ie" :
